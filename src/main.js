@@ -25,6 +25,8 @@ form.addEventListener('submit', (event) => {
     });
   }
 
+  list.innerHTML = '';
+
   fetchImages(value)
     .then(data => {
       if (data.hits && data.hits.length > 0) {
@@ -49,8 +51,13 @@ form.addEventListener('submit', (event) => {
           loader.classList.toggle('visually-hidden');
         }
     })
-    .catch(err => {});
+    .catch(err => {
+      console.log(err);
+      iziToast.error({
+        position: "topRight",
+        message: 'Sorry, the request cant be completed at this time. Please try again',
+      })
+    });
 
   input.value = '';
-  list.innerHTML = '';
 });
